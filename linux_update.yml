@@ -2,7 +2,7 @@
   gather_facts: true
   tasks:
     
-    - name: populate service facts
+    - name: Populate service facts
       service_facts:
     
     - import_role:
