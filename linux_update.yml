@@ -1,6 +1,5 @@
-- hosts: linux
+- hosts: "*"
   gather_facts: true
-  vars_files: vars/auth
   tasks:
     
     - name: populate service facts
