@@ -1,0 +1,24 @@
+---
+# tasks file for update
+- name: Update the repository cache and update all packages
+  apt:
+    name: "*"
+    update_cache: yes
+    state: latest
+  when: "'Debian' in ansible_distribution_file_variety"
+
+- name: Check if a reboot is needed
+  stat:
+    path: /var/run/reboot-required
+    get_checksum: false
+  register: reboot_required_file
+
+- name: Rebooting
+  reboot:
+    msg: "Reboot initiated by Ansible due to kernel updates"
+    connect_timeout: 10
+    reboot_timeout: 900
+    pre_reboot_delay: 0
+    post_reboot_delay: 30
+    test_command: uptime
+  when: reboot_required_file.stat.exists

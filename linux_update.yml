@@ -1,0 +1,11 @@
+- hosts: linux
+  gather_facts: true
+  vars_files: vars/auth
+  tasks:
+    
+    - name: populate service facts
+      service_facts:
+    
+    - import_role:
+        name: update
+        tasks_from: main
