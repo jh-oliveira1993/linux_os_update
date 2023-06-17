@@ -13,6 +13,7 @@
     name: "*"
     state: latest
   when: "'RedHat' in ansible_os_family"
+  become: true
 
 - name: Check if a reboot is needed
   stat:
